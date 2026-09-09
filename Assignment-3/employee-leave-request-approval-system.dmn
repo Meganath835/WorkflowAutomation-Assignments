@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0ncfbkd" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.49.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0">
+  <decision id="Decision_0l08pwt" name="Evaluate Leave Request">
+    <decisionTable id="DecisionTable_1x07dmc">
+      <input id="Input_1" label="Leave Type">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1myj9xk" label="Requested Days">
+        <inputExpression id="LiteralExpression_1id6nx2" typeRef="number">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0swj06x" label="Available Balance">
+        <inputExpression id="LiteralExpression_08cejr4" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Decision" typeRef="string" />
+      <rule id="DecisionRule_0nw44ln">
+        <description>Insufficient Balance</description>
+        <inputEntry id="UnaryTests_1omuc0n">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o8o307">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xg0i1p">
+          <text>&lt;requestedDays</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_179v5ht">
+          <text>REJECT</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1unn2uu">
+        <description>Sick Leave Auto-Approved</description>
+        <inputEntry id="UnaryTests_1wes97b">
+          <text>Sick</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cevn5f">
+          <text>&lt;=3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xwvhxh">
+          <text>&gt;=requestedDays</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0w63up9">
+          <text>AUTO_APPROVE</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ffjcuu">
+        <description>Manager Approval Required</description>
+        <inputEntry id="UnaryTests_1ybeown">
+          <text>Sick</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06wtrcz">
+          <text>&gt;3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ybkkj0">
+          <text>&gt;=requestedDays</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0hm79pk">
+          <text>MANAGER_REVIEW</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0x8bbax">
+        <description>Manager Approval Required</description>
+        <inputEntry id="UnaryTests_0nbi5vf">
+          <text>Casual</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ar1nx5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1elf1ph">
+          <text>&gt;=requestedDays</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1259hzi">
+          <text>MANAGER_REVIEW</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0nj4j7t">
+        <description>Manager Approval Required</description>
+        <inputEntry id="UnaryTests_00v55kz">
+          <text>Earned</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xet2sb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14smzrz">
+          <text>&gt;=requestedDays</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01kjv5t">
+          <text>MANAGER_REVIEW</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="Decision_0l08pwt_di" dmnElementRef="Decision_0l08pwt">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
