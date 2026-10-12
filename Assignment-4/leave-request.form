@@ -1,0 +1,48 @@
+{
+  "components": [
+    {
+      "label": "Employee Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_Name",
+        "columns": null
+      },
+      "id": "Field_EmployeeName",
+      "key": "employeeName",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Leave Date",
+      "type": "datetime",
+      "subtype": "date",
+      "layout": {
+        "row": "Row_Date",
+        "columns": null
+      },
+      "id": "Field_LeaveDate",
+      "key": "leaveDate",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Reason for Leave",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_Reason",
+        "columns": null
+      },
+      "id": "Field_Reason",
+      "key": "reason",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "leave-request-form",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.7.0"
+}
