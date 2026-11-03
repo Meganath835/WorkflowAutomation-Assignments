@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "Exercise 6 - Start Camunda 8 Process via API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Start leave-request instance",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"processDefinitionId\": \"leave-request\",\n  \"variables\": {\n    \"employeeName\": \"Ravi\",\n    \"days\": 3\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v2/process-instances",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v2",
+            "process-instances"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2. Viva - wrong Process ID",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"processDefinitionId\": \"leave-requst\",\n  \"variables\": {\n    \"employeeName\": \"Ravi\",\n    \"days\": 3\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v2/process-instances",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v2",
+            "process-instances"
+          ]
+        }
+      }
+    }
+  ]
+}
