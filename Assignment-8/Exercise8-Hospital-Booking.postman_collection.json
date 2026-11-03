@@ -1,0 +1,143 @@
+{
+  "info": {
+    "name": "Exercise 8 - Hospital Appointment Booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "telegramChatId",
+      "value": "123456789"
+    }
+  ],
+  "item": [
+    {
+      "name": "Case 1 - Cardiology, bookedCount 3 (booking succeeds)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"processDefinitionId\": \"hospital-booking\",\n  \"variables\": {\n    \"patientName\": \"Ravi Kumar\",\n    \"department\": \"Cardiology\",\n    \"preferredSlot\": \"2026-11-10T10:00\",\n    \"telegramChatId\": {{telegramChatId}},\n    \"patientId\": \"P1001\",\n    \"bookedCount\": 3\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v2/process-instances",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v2",
+            "process-instances"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Case 2 - Cardiology, bookedCount 12 (slot full)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"processDefinitionId\": \"hospital-booking\",\n  \"variables\": {\n    \"patientName\": \"Ravi Kumar\",\n    \"department\": \"Cardiology\",\n    \"preferredSlot\": \"2026-11-10T10:00\",\n    \"telegramChatId\": {{telegramChatId}},\n    \"patientId\": \"P1002\",\n    \"bookedCount\": 12\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v2/process-instances",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v2",
+            "process-instances"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Case 3a - Booking for P1003 (send first)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"processDefinitionId\": \"hospital-booking\",\n  \"variables\": {\n    \"patientName\": \"Ravi Kumar\",\n    \"department\": \"Cardiology\",\n    \"preferredSlot\": \"2026-11-10T10:00\",\n    \"telegramChatId\": {{telegramChatId}},\n    \"patientId\": \"P1003\",\n    \"bookedCount\": 3\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v2/process-instances",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v2",
+            "process-instances"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Case 3b - Cancel P1003 (send within 10 min of 3a)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"cancel-booking\",\n  \"correlationKey\": \"P1003\",\n  \"timeToLive\": 0,\n  \"variables\": {\n    \"cancelReason\": \"Patient request\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v2/messages/publication",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v2",
+            "messages",
+            "publication"
+          ]
+        }
+      }
+    }
+  ]
+}
