@@ -1,0 +1,40 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "8.8.0"
+  },
+  "schemaVersion": 16,
+  "id": "warden-approval-form",
+  "type": "default",
+  "components": [
+    {
+      "type": "text",
+      "id": "Field_details",
+      "text": "## Out-pass request\n\n**Student:** {{studentName}} ({{regNo}}), Block {{hostelBlock}}\n\n**Out:** {{outDate}} \u00b7 **Return:** {{returnDate}} \u00b7 (**{{nights}}** nights)\n\n**Purpose:** {{purpose}}\n\n**Parent phone:** {{parentPhone}}",
+      "layout": {
+        "row": "Row_1"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "Field_approved",
+      "key": "approved",
+      "label": "Approve this out-pass",
+      "defaultValue": false,
+      "layout": {
+        "row": "Row_2"
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "Field_remarks",
+      "key": "wardenRemarks",
+      "label": "Warden remarks",
+      "layout": {
+        "row": "Row_3"
+      }
+    }
+  ]
+}
